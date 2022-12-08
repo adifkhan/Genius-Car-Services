@@ -1,0 +1,12 @@
+.expert {
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+}
+
+.expert-img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}

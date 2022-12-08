@@ -1,0 +1,10 @@
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: large;
+    font-weight: 700;
+    color: snow;
+    height: 100px;
+    margin-top: 20px;
+}
