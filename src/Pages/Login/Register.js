@@ -2,20 +2,20 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
+import { signOut } from 'firebase/auth';
 
 
 const Register = () => {
 
     const [
         createUserWithEmailAndPassword,
-        user,
-        loading,
-        error,
+        user
     ] = useCreateUserWithEmailAndPassword(auth);
     const navigate = useNavigate();
 
     if (user) {
-        navigate('/home');
+        navigate('/login');
+        signOut(auth);
     }
 
     const handleSubmit = event => {
