@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { signOut } from 'firebase/auth';
 import SocialLogin from './SocialLogin';
+import Loading from '../../Shared/Loading/Loading';
 
 
 const Register = () => {
@@ -15,25 +16,33 @@ const Register = () => {
         user,
         loading,
         error,
-    ] = useCreateUserWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
     const navigate = useNavigate();
 
+    if (loading || updating) {
+        return <Loading></Loading>
+    }
     if (user) {
         navigate('/login');
+        console.log(user);
         signOut(auth);
     }
-    if (error) {
-        errorElement = <p className='text-danger'>{error?.message}</p>
+    if (error || updateError) {
+        errorElement = <p className='text-danger'>{error?.message} {updateError?.message}</p>
     }
 
-    const handleSubmit = event => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         const name = event.target.name.value;
         const email = event.target.email.value;
         const password = event.target.password.value;
 
-        createUserWithEmailAndPassword(email, password);
+        await createUserWithEmailAndPassword(email, password);
+        await updateProfile({ displayName: name });
+        alert('Updated profile');
     }
     return (
         <div className='container'>
@@ -56,8 +65,8 @@ const Register = () => {
                             <label htmlFor='terms' className={`form-check-label ${agree ? '' : 'text-danger'}`}>Accept The Car Doctor's Terms & Conditions</label>
                         </div>
                         <button
-                        disabled={!agree}
-                        type="submit" className="btn btn-dark w-100">Register</button>
+                            disabled={!agree}
+                            type="submit" className="btn btn-dark w-100">Register</button>
                     </form>
                     {errorElement}
                     <p className='text-center'>Already have an account? <Link className='text-decoration-none text-primary fw-bold' to='/login'>Login</Link></p>

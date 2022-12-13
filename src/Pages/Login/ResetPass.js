@@ -3,6 +3,9 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
+import Loading from '../../Shared/Loading/Loading';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const ResetPass = () => {
@@ -14,11 +17,13 @@ const ResetPass = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const email = emailRef.current.value;
-        await sendPasswordResetEmail(email);
-        alert('Sent email');
+        if (email) {
+            await sendPasswordResetEmail(email);
+            toast('Sent email');
+        }
     }
-    if (error) {
-        errorElement = <p className='text-danger'>{error?.message}</p>
+    if (sending) {
+        return <Loading></Loading>
     }
     return (
         <div className='container'>
@@ -33,6 +38,7 @@ const ResetPass = () => {
                             Reset
                         </Button>
                     </Form>
+                    <ToastContainer></ToastContainer>
                     {errorElement}
                 </div>
             </div>
