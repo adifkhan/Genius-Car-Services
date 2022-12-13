@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
@@ -8,6 +8,7 @@ import SocialLogin from './SocialLogin';
 
 const Register = () => {
     let errorElement;
+    const [agree, setAgree] = useState();
 
     const [
         createUserWithEmailAndPassword,
@@ -51,10 +52,12 @@ const Register = () => {
                             <input type="password" className="form-control" name='password' placeholder='Your Password' required />
                         </div>
                         <div className="mb-3 form-check">
-                            <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                            <label className="form-check-label">Check me out</label>
+                            <input onClick={() => setAgree(!agree)} type="checkbox" className="form-check-input" name='terms' id="terms" />
+                            <label htmlFor='terms' className={`form-check-label ${agree ? '' : 'text-danger'}`}>Accept The Car Doctor's Terms & Conditions</label>
                         </div>
-                        <button type="submit" className="btn btn-dark w-100">Register</button>
+                        <button
+                        disabled={!agree}
+                        type="submit" className="btn btn-dark w-100">Register</button>
                     </form>
                     {errorElement}
                     <p className='text-center'>Already have an account? <Link className='text-decoration-none text-primary fw-bold' to='/login'>Login</Link></p>

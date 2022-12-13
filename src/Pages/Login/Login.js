@@ -35,7 +35,6 @@ const Login = () => {
     if (error) {
         errorElement = <p className='text-danger'>{error?.message}</p>
     }
-
     return (
         <div className='container'>
             <div className=' my-3 w-50 mx-auto border border-2 p-3'>
@@ -49,11 +48,12 @@ const Login = () => {
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Control ref={passwordRef} type="password" placeholder="Password" required />
                         </Form.Group>
-                        <Button className='w-100' variant="dark" type="submit">
+                        <Button className='w-100 mb-2' variant="dark" type="submit">
                             Login
                         </Button>
                     </Form>
                     {errorElement}
+                    <p className='text-center'>Forgot Password? <Link className='text-decoration-none text-primary fw-bold' to='/resetPass'>Reset Now</Link></p>
                     <p className='text-center'>New to The Car Doctor? <Link className='text-decoration-none text-primary fw-bold' to='/register'>Register Now</Link></p>
                 </div>
             </div>

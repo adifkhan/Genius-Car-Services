@@ -10,6 +10,7 @@ import ServiceDetails from './Pages/ServiceDetails/ServiceDetails';
 import Register from './Pages/Login/Register';
 import RequireAuth from './Pages/Login/RequireAuth';
 import CheckOut from './Pages/CheckOut/CheckOut';
+import ResetPass from './Pages/Login/ResetPass';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path='/about' element={<About></About>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>
+        <Route path='/resetPass' element={<ResetPass></ResetPass>}></Route>
         <Route path='/checkout' element={
           <RequireAuth>
             <CheckOut></CheckOut>
