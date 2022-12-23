@@ -5,6 +5,7 @@ import auth from '../../firebase.init';
 import { signOut } from 'firebase/auth';
 import SocialLogin from './SocialLogin';
 import Loading from '../../Shared/Loading/Loading';
+import { Helmet } from 'react-helmet-async';
 
 
 const Register = () => {
@@ -26,7 +27,6 @@ const Register = () => {
     }
     if (user) {
         navigate('/login');
-        console.log(user);
         signOut(auth);
     }
     if (error || updateError) {
@@ -46,6 +46,10 @@ const Register = () => {
     }
     return (
         <div className='container'>
+            <Helmet>
+                <title>Register - The Car Doctor</title>
+            </Helmet>
+
             <div className=' my-3 w-50 mx-auto border border-2 p-3'>
                 <h2 className='text-center fs-2 mb-4'>Register</h2>
                 <SocialLogin></SocialLogin>

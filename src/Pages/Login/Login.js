@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { Helmet } from 'react-helmet-async';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import Loading from '../../Shared/Loading/Loading';
@@ -41,6 +42,10 @@ const Login = () => {
     }
     return (
         <div className='container'>
+            <Helmet>
+                <title>Login - The Car Doctor</title>
+            </Helmet>
+
             <div className=' my-3 w-50 mx-auto border border-2 p-3'>
                 <h2 className='text-center fs-2 mb-4'>Login</h2>
                 <SocialLogin></SocialLogin>
