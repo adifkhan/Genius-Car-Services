@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import Loading from '../../Shared/Loading/Loading';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Helmet } from 'react-helmet-async';
 
@@ -41,7 +41,6 @@ const ResetPass = () => {
                             Reset
                         </Button>
                     </Form>
-                    <ToastContainer></ToastContainer>
                 </div>
             </div>
         </div>

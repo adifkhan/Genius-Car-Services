@@ -1,0 +1,38 @@
+.checkout-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.service-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 320px;
+    margin: 20px 0;
+    padding: 5px;
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+
+.service-details img {
+    width: 100px;
+    height: 70px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.service-details p {
+    margin: 5px 0;
+    padding-right: 5px;
+}
+
+/* .user-form {
+    display: block;
+} */
+
+.user-form input {
+    display: block;
+    width: 500px;
+    margin: 5px 0;
+}
