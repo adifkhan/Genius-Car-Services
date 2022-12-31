@@ -6,7 +6,7 @@ import Services from '../Services/Services';
 const ManageServices = () => {
     const { register, handleSubmit } = useForm();
     const onSubmit = data => {
-        fetch('http://localhost:5000/service', {
+        fetch('https://the-car-doctor.vercel.app/service', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

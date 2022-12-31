@@ -14,7 +14,7 @@ const Orders = () => {
 
     useEffect(() => {
         const getOrder = async () => {
-            const url = `http://localhost:5000/order?email=${user.email}`;
+            const url = `https://the-car-doctor.vercel.app/order?email=${user?.email}`;
             try {
                 const { data } = await axios.get(url, {
                     headers: {
@@ -35,7 +35,7 @@ const Orders = () => {
 
     useEffect(() => {
         const serviceId = orders.map(order => order.id)
-        axios.post('http://localhost:5000/orders', serviceId)
+        axios.post('https://the-car-doctor.vercel.app/orders', serviceId)
             .then(response => {
                 const { data } = response;
                 setOrderedService(data);

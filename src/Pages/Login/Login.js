@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -6,6 +5,7 @@ import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Helmet } from 'react-helmet-async';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
+import useToken from '../../Hooks/useToken';
 import Loading from '../../Shared/Loading/Loading';
 import SocialLogin from './SocialLogin';
 
@@ -24,6 +24,7 @@ const Login = () => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+    const [token] = useToken(user);
 
     const handleSubmit = async event => {
         event.preventDefault();
@@ -31,15 +32,12 @@ const Login = () => {
         const password = passwordRef.current.value;
 
         await signInWithEmailAndPassword(email, password);
-        const { data } = await axios.post('http://localhost:5000/login', { email })
-        localStorage.setItem('accessToken', data.accessToken);
-        navigate(from, { replace: true });
     }
     if (loading) {
         return <Loading></Loading>
     }
-    if (user) {
-        // navigate(from, { replace: true });
+    if (token) {
+        navigate(from, { replace: true });
     }
     if (error) {
         errorElement = <p className='text-danger'>{error?.message}</p>
